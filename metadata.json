@@ -1,0 +1,10 @@
+{
+  "name": "Remix: Weather + News Aggregator Dashboard",
+  "description": "A responsive and polished real-time dashboard aggregating weather data and global news headlines, with interactive filters, location detection, and customizable categories.",
+  "requestFramePermissions": [
+    "geolocation"
+  ],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

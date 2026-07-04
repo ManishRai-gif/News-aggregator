@@ -1,0 +1,339 @@
+@import "tailwindcss";
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+
+:root {
+  /* Fonts */
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  /* Colors (Light Mode) */
+  --background: #F8FAFC;
+  --foreground: #0F172A;
+  --card: rgba(255, 255, 255, 0.85);
+  --card-foreground: #0F172A;
+  --primary: #2563EB;
+  --primary-foreground: #FFFFFF;
+  --secondary: #38BDF8;
+  --secondary-foreground: #0F172A;
+  --accent: #F59E0B;
+  --accent-foreground: #FFFFFF;
+  --muted: #E2E8F0;
+  --muted-foreground: #64748B;
+  --border: rgba(37, 99, 235, 0.1);
+  --input: rgba(255, 255, 255, 0.7);
+  --destructive: #EF4444;
+}
+
+html.dark {
+  /* Colors (Dark Mode) */
+  --background: #0B1120;
+  --foreground: #E2E8F0;
+  --card: rgba(15, 23, 42, 0.8);
+  --card-foreground: #E2E8F0;
+  --primary: #3B82F6;
+  --primary-foreground: #FFFFFF;
+  --secondary: #38BDF8;
+  --secondary-foreground: #0F172A;
+  --accent: #F59E0B;
+  --accent-foreground: #FFFFFF;
+  --muted: #1E293B;
+  --muted-foreground: #94A3B8;
+  --border: rgba(255, 255, 255, 0.08);
+  --input: rgba(255, 255, 255, 0.05);
+  --destructive: #EF4444;
+}
+
+/* Map CSS variables to standard Tailwind v4 classes */
+@theme {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-destructive: var(--destructive);
+  
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
+}
+
+/* Custom properties mapped into tailwind classes */
+@layer base {
+  * {
+    border-color: var(--border);
+  }
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-sans);
+    min-height: 100vh;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    overflow-x: hidden;
+  }
+}
+
+/* Glassmorphism theme styling */
+.glass {
+  background: var(--card);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--border);
+}
+
+.glass-dark {
+  background: rgba(15, 23, 42, 0.45);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.glass-interactive {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-interactive:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.15);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px 0 rgba(0, 0, 0, 0.15);
+}
+
+html.dark .glass-interactive:hover {
+  background: rgba(30, 41, 59, 0.6);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.glass-interactive:active {
+  transform: translateY(0);
+}
+
+/* Dot grid background texture for weather cards */
+.dot-grid {
+  background-image: radial-gradient(rgba(255, 255, 255, 0.15) 1.5px, transparent 1.5px);
+  background-size: 16px 16px;
+}
+
+/* Hidden scrollbar but keeps scrollable */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+/* Custom elegant scrollbar */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.02);
+  border-radius: 10px;
+}
+html.dark .custom-scrollbar::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.01);
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+html.dark .custom-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+}
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.2);
+}
+html.dark .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* Radial blur backgrounds (Bloom Effects) */
+.bloom-light {
+  background: radial-gradient(circle at top center, rgba(56, 189, 248, 0.15) 0%, rgba(56, 189, 248, 0) 60%);
+}
+.bloom-dark {
+  background: radial-gradient(circle at top center, rgba(37, 99, 235, 0.12) 0%, rgba(37, 99, 235, 0) 60%);
+}
+
+/* Shimmer animation for loading skeleton */
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.animate-shimmer {
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.03) 25%, rgba(255, 255, 255, 0.08) 50%, rgba(255, 255, 255, 0.03) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+html.dark .animate-shimmer {
+  background: linear-gradient(90deg, rgba(15, 23, 42, 0.2) 25%, rgba(15, 23, 42, 0.4) 50%, rgba(15, 23, 42, 0.2) 75%);
+  background-size: 200% 100%;
+}
+
+/* Fade in scale-up transition */
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.98) translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.animate-fade-in-scale {
+  animation: fadeInScale 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Weather & UI Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-in {
+  animation: fadeIn 0.35s ease-out forwards;
+}
+
+@keyframes lightningFlash {
+  0%, 38%, 40%, 44%, 48%, 52%, 100% { opacity: 0; }
+  39%, 41%, 45%, 49%, 51% { opacity: 0.7; }
+}
+.animate-lightning-flash {
+  animation: lightningFlash 6s infinite ease-in-out;
+}
+
+@keyframes lightningFork {
+  0%, 38%, 41%, 46%, 100% { opacity: 0; }
+  39%, 40%, 47% { opacity: 0.95; }
+}
+.animate-lightning-fork {
+  animation: lightningFork 6s infinite ease-in-out;
+}
+
+@keyframes rainSlant {
+  0% { transform: translateY(-40px) rotate(14deg); opacity: 0; }
+  20% { opacity: 0.8; }
+  80% { opacity: 0.8; }
+  100% { transform: translateY(360px) rotate(14deg); opacity: 0; }
+}
+.animate-rain-slant {
+  animation: rainSlant 0.7s infinite linear;
+}
+
+@keyframes rainDrop {
+  0% { transform: translateY(-30px); opacity: 0; }
+  15% { opacity: 0.7; }
+  85% { opacity: 0.7; }
+  100% { transform: translateY(350px); opacity: 0; }
+}
+.animate-rain-drop {
+  animation: rainDrop 1s infinite linear;
+}
+
+@keyframes splash {
+  0% { transform: scale(0.3); opacity: 0; }
+  50% { opacity: 0.45; }
+  100% { transform: scale(1.8); opacity: 0; }
+}
+.animate-splash {
+  animation: splash 1s infinite ease-out;
+}
+
+@keyframes snowFall {
+  0% { transform: translateY(-20px) translateX(0); opacity: 0; }
+  20% { opacity: 0.8; }
+  50% { transform: translateY(150px) translateX(20px); }
+  80% { opacity: 0.8; }
+  100% { transform: translateY(340px) translateX(-15px); opacity: 0; }
+}
+.animate-snow-fall {
+  animation: snowFall 8s infinite linear;
+}
+
+@keyframes pulseSlow {
+  0%, 100% { transform: scale(1); opacity: 0.4; }
+  50% { transform: scale(1.15); opacity: 0.7; }
+}
+.animate-pulse-slow {
+  animation: pulseSlow 11s infinite ease-in-out;
+}
+
+@keyframes floatUp {
+  0% { transform: translateY(0) scale(0.6); opacity: 0; }
+  30% { opacity: 0.8; }
+  70% { opacity: 0.8; }
+  100% { transform: translateY(-290px) scale(1.2); opacity: 0; }
+}
+.animate-float-up {
+  animation: floatUp 6s infinite ease-in-out;
+}
+
+@keyframes spinSlow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+.animate-spin-slow {
+  animation: spinSlow 50s infinite linear;
+}
+
+@keyframes cloudDrift {
+  0% { transform: translateX(0) scale(1); }
+  50% { transform: translateX(140%) scale(1.06); }
+  100% { transform: translateX(0) scale(1); }
+}
+.animate-cloud-drift {
+  animation: cloudDrift 35s infinite ease-in-out;
+}
+
+@keyframes mistSwirl {
+  0%, 100% { transform: translateX(-30px) scaleY(0.95); opacity: 0.12; }
+  50% { transform: translateX(30px) scaleY(1.15); opacity: 0.32; }
+}
+.animate-mist-swirl {
+  animation: mistSwirl 15s infinite ease-in-out;
+}
+
+@keyframes windSweep {
+  0% { transform: translateX(0); opacity: 0; }
+  30% { opacity: 0.45; }
+  70% { opacity: 0.45; }
+  100% { transform: translateX(360px); opacity: 0; }
+}
+.animate-wind-sweep {
+  animation: windSweep 2.5s infinite ease-in-out;
+}
+
+@keyframes leafTumble {
+  0% { transform: translate(-10px, 0) rotate(0deg); }
+  50% { transform: translate(180px, 30px) rotate(180deg); }
+  100% { transform: translate(360px, 15px) rotate(360deg); }
+}
+.animate-leaf-tumble {
+  animation: leafTumble 4.5s infinite linear;
+}
+
+@keyframes bounceSlow {
+  0%, 100% { transform: translateY(-15%); }
+  50% { transform: translateY(0); }
+}
+.animate-bounce-slow {
+  animation: bounceSlow 2s infinite ease-in-out;
+}
+
